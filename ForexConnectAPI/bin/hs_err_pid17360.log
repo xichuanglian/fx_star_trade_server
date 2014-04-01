@@ -1,0 +1,283 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x000000006df1b2ac, pid=17360, tid=12572
+#
+# JRE version: Java(TM) SE Runtime Environment (7.0_51-b13) (build 1.7.0_51-b13)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (24.51-b03 mixed mode windows-amd64 compressed oops)
+# Problematic frame:
+# V  [jvm.dll+0x11b2ac]
+#
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.sun.com/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000000000017d800):  JavaThread "main" [_thread_in_vm, id=12572, stack(0x0000000002460000,0x0000000002560000)]
+
+siginfo: ExceptionCode=0xc0000005, reading address 0x0000000000000000
+
+Registers:
+RAX=0x0000000000000000, RBX=0x000000000017d800, RCX=0x0000000000000d80, RDX=0x0000000000000000
+RSP=0x000000000255f360, RBP=0x000000000255f4a8, RSI=0x0000000000000000, RDI=0x0000000000000000
+R8 =0x0000000000000000, R9 =0x0000000000000001, R10=0x000000006e4ebf80, R11=0x00000007abf61ad2
+R12=0x0000000002025c60, R13=0x00000006fe18d468, R14=0x0000000000000000, R15=0x000000000651a6a0
+RIP=0x000000006df1b2ac, EFLAGS=0x0000000000010246
+
+Top of Stack: (sp=0x000000000255f360)
+0x000000000255f360:   0000000000000000 0000000002025c60
+0x000000000255f370:   0000000000000000 0000000000000001
+0x000000000255f380:   000000000017d800 0000000000000000
+0x000000000255f390:   0000000000000022 000000000255f4a8
+0x000000000255f3a0:   000000000255f4f0 00000006fe18d468
+0x000000000255f3b0:   0000000002025c60 000007fefae9222a
+0x000000000255f3c0:   000000000017d9e8 000000000255f4a8
+0x000000000255f3d0:   0000000000000022 00000000026660f8
+0x000000000255f3e0:   000000000255f400 000000000017d800
+0x000000000255f3f0:   000000000017d800 0000000000000000
+0x000000000255f400:   00000000026660f8 0000000002673090
+0x000000000255f410:   000000000017d9e8 00000006fe18d468
+0x000000000255f420:   0000000000000022 000000000255f4e0
+0x000000000255f430:   0000000000000000 000000000255f4d0
+0x000000000255f440:   000000000255f4c8 000000000017d800
+0x000000000255f450:   000000000255f548 000000000267e123 
+
+Instructions: (pc=0x000000006df1b2ac)
+0x000000006df1b28c:   00 00 06 00 00 00 48 89 5c 24 20 48 89 7c 24 28
+0x000000006df1b29c:   48 39 7b 08 74 0a 48 8d 4c 24 20 e8 24 fc 10 00
+0x000000006df1b2ac:   48 8b 36 48 8b ce e8 b9 90 f3 ff 40 38 3d c2 19
+0x000000006df1b2bc:   63 00 4c 63 e0 74 0a 33 c9 e8 06 d3 12 00 48 8b 
+
+
+Register to memory mapping:
+
+RAX=0x0000000000000000 is an unknown value
+RBX=0x000000000017d800 is a thread
+RCX=0x0000000000000d80 is an unknown value
+RDX=0x0000000000000000 is an unknown value
+RSP=0x000000000255f360 is pointing into the stack for thread: 0x000000000017d800
+RBP=0x000000000255f4a8 is pointing into the stack for thread: 0x000000000017d800
+RSI=0x0000000000000000 is an unknown value
+RDI=0x0000000000000000 is an unknown value
+R8 =0x0000000000000000 is an unknown value
+R9 =0x0000000000000001 is an unknown value
+R10=0x000000006e4ebf80 is an unknown value
+R11=0x00000007abf61ad2 is an unknown value
+R12=0x0000000002025c60 is an unknown value
+R13=0x00000006fe18d468 is an oop
+{method} 
+ - klass: {other class}
+R14=0x0000000000000000 is an unknown value
+R15=0x000000000651a6a0 is an unknown value
+
+
+Stack: [0x0000000002460000,0x0000000002560000],  sp=0x000000000255f360,  free space=1020k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x11b2ac]
+j  com.fxcore2.O2GSession.login(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V+9
+j  com.fxstar.tradeserver.trader.Trader.login(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/fxstar/tradeserver/listener/Callback;Lcom/fxstar/tradeserver/listener/Callback;)V+129
+j  com.fxstar.tradeserver.TradeServer.start()V+106
+j  com.fxstar.tradeserver.TradeServer.main([Ljava/lang/String;)V+15
+v  ~StubRoutines::call_stub
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  com.fxcore2.O2GSession.loginNative(JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V+0
+j  com.fxcore2.O2GSession.login(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V+9
+j  com.fxstar.tradeserver.trader.Trader.login(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/fxstar/tradeserver/listener/Callback;Lcom/fxstar/tradeserver/listener/Callback;)V+129
+j  com.fxstar.tradeserver.TradeServer.start()V+106
+j  com.fxstar.tradeserver.TradeServer.main([Ljava/lang/String;)V+15
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x000000001156e000 JavaThread "MongoCleaner246785270" daemon [_thread_blocked, id=7268, stack(0x0000000011d30000,0x0000000011e30000)]
+  0x000000000edad800 JavaThread "Service Thread" daemon [_thread_blocked, id=12580, stack(0x0000000011160000,0x0000000011260000)]
+  0x000000000eda3800 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=1192, stack(0x0000000010f40000,0x0000000011040000)]
+  0x000000000eda1800 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=12196, stack(0x0000000010d60000,0x0000000010e60000)]
+  0x000000000eda0800 JavaThread "Attach Listener" daemon [_thread_blocked, id=11964, stack(0x0000000010bd0000,0x0000000010cd0000)]
+  0x000000000ed4f000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=8612, stack(0x0000000010990000,0x0000000010a90000)]
+  0x000000000ed33000 JavaThread "Finalizer" daemon [_thread_blocked, id=19320, stack(0x0000000010690000,0x0000000010790000)]
+  0x000000000ed2b800 JavaThread "Reference Handler" daemon [_thread_blocked, id=11952, stack(0x0000000010790000,0x0000000010890000)]
+=>0x000000000017d800 JavaThread "main" [_thread_in_vm, id=12572, stack(0x0000000002460000,0x0000000002560000)]
+
+Other Threads:
+  0x000000000ed28000 VMThread [stack: 0x00000000104f0000,0x00000000105f0000] [id=14048]
+  0x000000001126a800 WatcherThread [stack: 0x00000000117b0000,0x00000000118b0000] [id=8004]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap
+ PSYoungGen      total 75776K, used 7814K [0x00000007ab900000, 0x00000007b0d80000, 0x0000000800000000)
+  eden space 65024K, 12% used [0x00000007ab900000,0x00000007ac0a1878,0x00000007af880000)
+  from space 10752K, 0% used [0x00000007b0300000,0x00000007b0300000,0x00000007b0d80000)
+  to   space 10752K, 0% used [0x00000007af880000,0x00000007af880000,0x00000007b0300000)
+ ParOldGen       total 172544K, used 0K [0x0000000702c00000, 0x000000070d480000, 0x00000007ab900000)
+  object space 172544K, 0% used [0x0000000702c00000,0x0000000702c00000,0x000000070d480000)
+ PSPermGen       total 21504K, used 7764K [0x00000006fda00000, 0x00000006fef00000, 0x0000000702c00000)
+  object space 21504K, 36% used [0x00000006fda00000,0x00000006fe195330,0x00000006fef00000)
+
+Card table byte_map: [0x0000000005720000,0x0000000005f40000] byte_map_base: 0x0000000001f33000
+
+Polling page: 0x0000000000120000
+
+Code Cache  [0x0000000002660000, 0x00000000028d0000, 0x0000000005660000)
+ total_blobs=283 nmethods=22 adapters=214 free_code_cache=48691Kb largest_free_block=49851712
+
+Compilation events (10 events):
+Event: 0.398 Thread 0x000000000eda1800   18             java.io.Win32FileSystem::normalize (143 bytes)
+Event: 0.401 Thread 0x000000000eda1800 nmethod 18 0x00000000026c5c10 code [0x00000000026c5d80, 0x00000000026c6090]
+Event: 0.426 Thread 0x000000000eda3800   19             java.lang.Math::min (11 bytes)
+Event: 0.427 Thread 0x000000000eda3800 nmethod 19 0x00000000026cbad0 code [0x00000000026cbc00, 0x00000000026cbc58]
+Event: 0.451 Thread 0x000000000eda1800   20             java.lang.CharacterData::of (120 bytes)
+Event: 0.452 Thread 0x000000000eda1800 nmethod 20 0x00000000026cc150 code [0x00000000026cc2a0, 0x00000000026cc358]
+Event: 0.452 Thread 0x000000000eda1800   21             java.lang.CharacterDataLatin1::getProperties (11 bytes)
+Event: 0.452 Thread 0x000000000eda1800 nmethod 21 0x00000000026cbf10 code [0x00000000026cc040, 0x00000000026cc0d8]
+Event: 0.452 Thread 0x000000000eda1800   22             java.lang.String$CaseInsensitiveComparator::compare (111 bytes)
+Event: 0.456 Thread 0x000000000eda1800 nmethod 22 0x00000000026d2ad0 code [0x00000000026d2c60, 0x00000000026d3090]
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Internal exceptions (10 events):
+Event: 0.490 Thread 0x000000000017d800 Threw 0x00000007abf82338 at C:\re\jdk7u51\527\hotspot\src\share\vm\prims\jvm.cpp:1244
+Event: 0.491 Thread 0x000000000017d800 Threw 0x00000007abf83e98 at C:\re\jdk7u51\527\hotspot\src\share\vm\prims\jvm.cpp:1244
+Event: 0.491 Thread 0x000000000017d800 Threw 0x00000007abf85a48 at C:\re\jdk7u51\527\hotspot\src\share\vm\prims\jvm.cpp:1244
+Event: 0.505 Thread 0x000000000017d800 Threw 0x00000007abf8e948 at C:\re\jdk7u51\527\hotspot\src\share\vm\prims\jvm.cpp:1244
+Event: 0.506 Thread 0x000000000017d800 Threw 0x00000007abf92248 at C:\re\jdk7u51\527\hotspot\src\share\vm\prims\jvm.cpp:1244
+Event: 0.506 Thread 0x000000000017d800 Threw 0x00000007abf9af88 at C:\re\jdk7u51\527\hotspot\src\share\vm\prims\jvm.cpp:1244
+Event: 0.506 Thread 0x000000000017d800 Threw 0x00000007abf9d3f0 at C:\re\jdk7u51\527\hotspot\src\share\vm\prims\jvm.cpp:1244
+Event: 0.508 Thread 0x000000000017d800 Threw 0x00000007abf9ff80 at C:\re\jdk7u51\527\hotspot\src\share\vm\prims\jvm.cpp:1244
+Event: 0.508 Thread 0x000000000017d800 Threw 0x00000007abfa23f8 at C:\re\jdk7u51\527\hotspot\src\share\vm\prims\jvm.cpp:1244
+Event: 0.509 Thread 0x000000000017d800 Threw 0x00000007abfa5580 at C:\re\jdk7u51\527\hotspot\src\share\vm\prims\jvm.cpp:1244
+
+Events (10 events):
+Event: 0.506 loading class 0x000000001157e060
+Event: 0.506 loading class 0x000000001157e060 done
+Event: 0.508 loading class 0x00000000020372e0
+Event: 0.508 loading class 0x00000000020372e0 done
+Event: 0.508 loading class 0x000000000205fa30
+Event: 0.508 loading class 0x000000000205fa30 done
+Event: 0.508 loading class 0x000000000eda4f20
+Event: 0.508 loading class 0x000000000eda4f20 done
+Event: 0.509 loading class 0x0000000002037290
+Event: 0.509 loading class 0x0000000002037290 done
+
+
+Dynamic libraries:
+0x000000013f0a0000 - 0x000000013f0d3000 	D:\Program Files\Java\jre7\bin\javaw.exe
+0x0000000077b20000 - 0x0000000077cc9000 	C:\Windows\SYSTEM32\ntdll.dll
+0x0000000077a00000 - 0x0000000077b1f000 	C:\Windows\system32\kernel32.dll
+0x000007fefdc90000 - 0x000007fefdcfb000 	C:\Windows\system32\KERNELBASE.dll
+0x000007fefed80000 - 0x000007fefee5b000 	C:\Windows\system32\ADVAPI32.dll
+0x000007fefe770000 - 0x000007fefe80f000 	C:\Windows\system32\msvcrt.dll
+0x000007fefe010000 - 0x000007fefe02f000 	C:\Windows\SYSTEM32\sechost.dll
+0x000007fefdda0000 - 0x000007fefdecd000 	C:\Windows\system32\RPCRT4.dll
+0x0000000077900000 - 0x00000000779fa000 	C:\Windows\system32\USER32.dll
+0x000007fefe030000 - 0x000007fefe097000 	C:\Windows\system32\GDI32.dll
+0x000007fefe8e0000 - 0x000007fefe8ee000 	C:\Windows\system32\LPK.dll
+0x000007feffc00000 - 0x000007feffcc9000 	C:\Windows\system32\USP10.dll
+0x000007fefcb40000 - 0x000007fefcd34000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7601.17514_none_fa396087175ac9ac\COMCTL32.dll
+0x000007feffdb0000 - 0x000007feffe21000 	C:\Windows\system32\SHLWAPI.dll
+0x000007fefded0000 - 0x000007fefdefe000 	C:\Windows\system32\IMM32.DLL
+0x000007fefdf00000 - 0x000007fefe009000 	C:\Windows\system32\MSCTF.dll
+0x000007fefd8a0000 - 0x000007fefd8cf000 	C:\Windows\system32\nvinitx.dll
+0x000000000f000000 - 0x000000000f006000 	C:\Program Files\NVIDIA Corporation\CoProcManager\_etoured.dll
+0x000007fef9000000 - 0x000007fef905f000 	C:\Program Files\NVIDIA Corporation\CoProcManager\nvd3d9wrapx.dll
+0x000007fefe590000 - 0x000007fefe767000 	C:\Windows\system32\SETUPAPI.dll
+0x000007fefd9d0000 - 0x000007fefda06000 	C:\Windows\system32\CFGMGR32.dll
+0x000007feffcd0000 - 0x000007feffda7000 	C:\Windows\system32\OLEAUT32.dll
+0x000007fefea50000 - 0x000007fefec53000 	C:\Windows\system32\ole32.dll
+0x000007fefd9a0000 - 0x000007fefd9ba000 	C:\Windows\system32\DEVOBJ.dll
+0x000007fef8fb0000 - 0x000007fef8ff6000 	C:\Program Files\NVIDIA Corporation\CoProcManager\nvdxgiwrapx.dll
+0x00000000747a0000 - 0x0000000074872000 	D:\Program Files\Java\jre7\bin\msvcr100.dll
+0x000000006de00000 - 0x000000006e5c9000 	D:\Program Files\Java\jre7\bin\server\jvm.dll
+0x000007fef6d80000 - 0x000007fef6d89000 	C:\Windows\system32\WSOCK32.dll
+0x000007fefe890000 - 0x000007fefe8dd000 	C:\Windows\system32\WS2_32.dll
+0x000007fefee60000 - 0x000007fefee68000 	C:\Windows\system32\NSI.dll
+0x000007fefb2f0000 - 0x000007fefb32b000 	C:\Windows\system32\WINMM.dll
+0x0000000077cf0000 - 0x0000000077cf7000 	C:\Windows\system32\PSAPI.DLL
+0x0000000074790000 - 0x000000007479f000 	D:\Program Files\Java\jre7\bin\verify.dll
+0x0000000074760000 - 0x0000000074788000 	D:\Program Files\Java\jre7\bin\java.dll
+0x0000000074740000 - 0x0000000074755000 	D:\Program Files\Java\jre7\bin\zip.dll
+0x0000000074720000 - 0x0000000074739000 	D:\Program Files\Java\jre7\bin\net.dll
+0x000007fefd140000 - 0x000007fefd195000 	C:\Windows\system32\mswsock.dll
+0x000007fefd130000 - 0x000007fefd137000 	C:\Windows\System32\wship6.dll
+0x000007fefb000000 - 0x000007fefb027000 	C:\Windows\system32\IPHLPAPI.DLL
+0x000007fefaff0000 - 0x000007fefaffb000 	C:\Windows\system32\WINNSI.DLL
+0x000007fefad00000 - 0x000007fefad18000 	C:\Windows\system32\dhcpcsvc.DLL
+0x000007feface0000 - 0x000007fefacf1000 	C:\Windows\system32\dhcpcsvc6.DLL
+0x000000006fbe0000 - 0x000000006fbeb000 	D:\Program Files\Java\jre7\bin\management.dll
+0x000007fefb9d0000 - 0x000007fefb9e5000 	C:\Windows\system32\NLAapi.dll
+0x000007fef7380000 - 0x000007fef7395000 	C:\Windows\system32\napinsp.dll
+0x000007fef7360000 - 0x000007fef7379000 	C:\Windows\system32\pnrpnsp.dll
+0x000007fefcfc0000 - 0x000007fefd01b000 	C:\Windows\system32\DNSAPI.dll
+0x000007fef7350000 - 0x000007fef735b000 	C:\Windows\System32\winrnr.dll
+0x000007fef7340000 - 0x000007fef7350000 	C:\Windows\system32\wshbth.dll
+0x000007fefc430000 - 0x000007fefc437000 	C:\Windows\System32\wshtcpip.dll
+0x000007fef79e0000 - 0x000007fef79e8000 	C:\Windows\system32\rasadhlp.dll
+0x000007fefadb0000 - 0x000007fefae03000 	C:\Windows\System32\fwpuclnt.dll
+0x0000000074700000 - 0x0000000074711000 	D:\Program Files\Java\jre7\bin\nio.dll
+0x000007fee54f0000 - 0x000007fee55c9000 	E:\workspace\FXStarTradeServer\ForexConnectAPI\bin\gstool2.dll
+0x000007fee5490000 - 0x000007fee54e4000 	E:\workspace\FXStarTradeServer\ForexConnectAPI\bin\gsexpat.dll
+0x0000000070350000 - 0x0000000070459000 	C:\Windows\WinSxS\amd64_microsoft.vc80.crt_1fc8b3b9a1e18e3b_8.0.50727.4940_none_88df89932faf0bf6\MSVCP80.dll
+0x0000000075630000 - 0x00000000756f9000 	C:\Windows\WinSxS\amd64_microsoft.vc80.crt_1fc8b3b9a1e18e3b_8.0.50727.4940_none_88df89932faf0bf6\MSVCR80.dll
+0x000007fefd7d0000 - 0x000007fefd7df000 	C:\Windows\system32\CRYPTBASE.dll
+0x000007fefb4d0000 - 0x000007fefb526000 	C:\Windows\system32\uxtheme.dll
+0x000007fee5430000 - 0x000007fee548d000 	E:\workspace\FXStarTradeServer\ForexConnectAPI\bin\fxmsg.dll
+0x000007fefc860000 - 0x000007fefc86c000 	C:\Windows\system32\VERSION.dll
+0x000007fefe350000 - 0x000007fefe590000 	C:\Windows\system32\WININET.dll
+0x000007fefdb10000 - 0x000007fefdb14000 	C:\Windows\system32\api-ms-win-downlevel-user32-l1-1-0.dll
+0x000007fefd980000 - 0x000007fefd984000 	C:\Windows\system32\api-ms-win-downlevel-shlwapi-l1-1-0.dll
+0x000007fefda50000 - 0x000007fefda54000 	C:\Windows\system32\api-ms-win-downlevel-version-l1-1-0.dll
+0x000007fefd990000 - 0x000007fefd993000 	C:\Windows\system32\api-ms-win-downlevel-normaliz-l1-1-0.dll
+0x0000000077ce0000 - 0x0000000077ce3000 	C:\Windows\system32\normaliz.DLL
+0x000007fefe0a0000 - 0x000007fefe349000 	C:\Windows\system32\iertutil.dll
+0x000007fefd9c0000 - 0x000007fefd9c5000 	C:\Windows\system32\api-ms-win-downlevel-advapi32-l1-1-0.dll
+0x000007fef8900000 - 0x000007fef8971000 	C:\Windows\system32\WINHTTP.dll
+0x000007fef8890000 - 0x000007fef88f4000 	C:\Windows\system32\webio.dll
+0x0000000011ae0000 - 0x0000000011c4c000 	C:\Windows\system32\CRYPT32.dll
+0x000007fefd970000 - 0x000007fefd97f000 	C:\Windows\system32\MSASN1.dll
+0x000007fefe8f0000 - 0x000007fefea4f000 	C:\Windows\system32\urlmon.dll
+0x000007fefda60000 - 0x000007fefda64000 	C:\Windows\system32\api-ms-win-downlevel-ole32-l1-1-0.dll
+0x0000000180000000 - 0x0000000180097000 	E:\workspace\FXStarTradeServer\ForexConnectAPI\bin\log4cplus.dll
+0x000007fee4dc0000 - 0x000007fee4ec1000 	E:\workspace\FXStarTradeServer\ForexConnectAPI\bin\ForexConnect.dll
+0x000007fef7530000 - 0x000007fef754a000 	E:\workspace\FXStarTradeServer\ForexConnectAPI\bin\gszlib.dll
+0x000007fef7490000 - 0x000007fef74c9000 	E:\workspace\FXStarTradeServer\ForexConnectAPI\bin\pdas.dll
+0x000007fefae90000 - 0x000007fefaea4000 	E:\workspace\FXStarTradeServer\ForexConnectAPI\bin\java\fxcore2.dll
+0x000007fef62d0000 - 0x000007fef63f5000 	C:\Windows\system32\dbghelp.dll
+
+VM Arguments:
+jvm_args: -Djava.library.path=.;./java -Dfile.encoding=GBK 
+java_command: com.fxstar.tradeserver.TradeServer log_config.xml
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+PATH=D:\Python33\Lib\site-packages\PyQt5;D:\Python33\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files (x86)\Intel\OpenCL SDK\2.0\bin\x86;C:\Program Files (x86)\Intel\OpenCL SDK\2.0\bin\x64;C:\Program Files\ThinkPad\Bluetooth Software\;C:\Program Files\ThinkPad\Bluetooth Software\syswow64;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Microsoft\Web Platform Installer\;C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET Web Pages\v1.0\;C:\Program Files (x86)\Windows Kits\8.0\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\
+USERNAME=Da Wei
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 58 Stepping 9, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 7 , 64 bit Build 7601 Service Pack 1
+
+CPU:total 4 (2 cores per cpu, 2 threads per core) family 6 model 58 stepping 9, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, aes, erms, ht, tsc, tscinvbit, tscinv
+
+Memory: 4k page, physical 16592464k(8820844k free), swap 33183064k(24476120k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (24.51-b03) for windows-amd64 JRE (1.7.0_51-b13), built on Dec 18 2013 18:40:56 by "java_re" with unknown MS VC++:1600
+
+time: Wed Feb 12 00:16:07 2014
+elapsed time: 0 seconds
+
