@@ -12,6 +12,7 @@ import com.fxcore2.O2GRow;
 import com.fxcore2.O2GTableType;
 import com.fxcore2.O2GTableUpdateType;
 import com.fxcore2.O2GValueMap;
+import com.fxstar.tradeserver.MongoDBWrapper;
 import com.fxstar.tradeserver.listener.TableStatusListener;
 import com.fxstar.tradeserver.listener.TableUpdateCallback;
 
@@ -21,8 +22,8 @@ public class Follower extends Trader{
 	private HashMap<String, String> tradeIdMap = null;
 	private final String CUSTOM_ID = "FX_STAR_AUTO_TRADE";
 	
-	public Follower(String id, String account, String password) {
-		super(id, account, password);
+	public Follower(String id, String aid, String account, String password, MongoDBWrapper db) {
+		super(id, aid, account, password, db);
 		tradeIdMap = new HashMap<String, String>();
 	}
 
@@ -92,10 +93,13 @@ public class Follower extends Trader{
 			@Override
 			public void execute(O2GRow row) {
 				O2GOrderTableRow r = (O2GOrderTableRow) row;			
-				if (r.getStatus().equals("F") && r.getRequestTXT().startsWith(CUSTOM_ID)) {
-					String id = r.getRequestTXT().substring(CUSTOM_ID.length());
-					logOrderTableRow(r);	
-					tradeIdMap.put(id, r.getTradeID());					
+				if (r.getStatus().equals("F")) {
+					logOrderTableRow(r);
+					saveTradeRecord(r);
+					if (r.getRequestTXT().startsWith(CUSTOM_ID)) {
+						String id = r.getRequestTXT().substring(CUSTOM_ID.length());
+						tradeIdMap.put(id, r.getTradeID());
+					}
 				}
 			}			
 		};

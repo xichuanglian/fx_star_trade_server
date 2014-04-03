@@ -18,25 +18,30 @@ import com.fxcore2.O2GTableManagerMode;
 import com.fxcore2.O2GTableType;
 import com.fxcore2.O2GTransport;
 import com.fxcore2.O2GValueMap;
+import com.fxstar.tradeserver.MongoDBWrapper;
 import com.fxstar.tradeserver.listener.Callback;
 import com.fxstar.tradeserver.listener.SessionStatusListener;
 import com.fxstar.tradeserver.listener.TableManagerStatusListener;
 
 public abstract class Trader {
 	private String objectID = "";
+	private String dbAccountID = "";
+	private String accountID = "";
 	private String fAccount = "";
 	private String fPassword = "";
-	private String accountID = "";
 	private O2GSession fSession = null;
 	private O2GTableManager tableManager = null;
 	private O2GRequestFactory rFactory = null;
 	private SessionStatusListener statusListener = null;
 	private TableManagerStatusListener tableManagerListener = null;
+	private MongoDBWrapper dbWrapper = null;
 	
 	private final Logger logger = Logger.getLogger(Trader.class);
 	
-	protected Trader(String id, String account, String password) {
+	protected Trader(String id, String aid, String account, String password, MongoDBWrapper db) {
 		objectID = id;
+		dbAccountID = aid;
+		dbWrapper = db;
 		if (account != null) {
 			fAccount = account;
 		} else {
@@ -51,6 +56,10 @@ public abstract class Trader {
 	
 	public String getObjectID() {
 		return objectID;
+	}
+	
+	public String getDBAccountID() {
+		return dbAccountID;
 	}
 	
 	public O2GSessionStatusCode getStatus() {
@@ -131,5 +140,9 @@ public abstract class Trader {
 					" Rate= " + row.getRate() + 
 					" Amount= " + row.getOriginAmount()
 				   );
+	}
+	
+	protected void saveTradeRecord(O2GOrderTableRow row) {
+		dbWrapper.saveTradeRecord(getDBAccountID(), row.getOfferID(), row.getRate(), row.getOriginAmount(), row.getBuySell(), row.getStatusTime());
 	}
 }

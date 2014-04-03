@@ -9,7 +9,9 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.MongoClient;
+import org.bson.types.ObjectId;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,9 +40,12 @@ public class MongoDBWrapper {
 				BasicDBObject obj = (BasicDBObject) cursor.next();
 				BasicDBObject account = (BasicDBObject) obj.get("account");
 				String id = obj.getString("_id");
+				String accountId = account.getString("_id");
 				experts.put(id, new Expert(id,
+										   accountId,
 										   account.getString("account_number"),
-						                   account.getString("password")
+						                   account.getString("password"),
+						                   this
 						                  ));
 			}
 		} catch (ClassCastException e) {
@@ -63,9 +68,12 @@ public class MongoDBWrapper {
 				BasicDBObject obj = (BasicDBObject) cursor.next();
 				BasicDBObject account = (BasicDBObject) obj.get("account");
 				String id = obj.getString("_id");
+				String accountId = account.getString("_id");
 				followers.put(id, new Follower(id,
+											   accountId,
 						               	       account.getString("account_number"),
-						               	       account.getString("password")
+						               	       account.getString("password"),
+						               	       this
 						               	  	  ));
 			}
 		} catch (ClassCastException e) {
@@ -90,5 +98,16 @@ public class MongoDBWrapper {
 		} finally {
 			cursor.close();
 		}
+	}
+	
+	public void saveTradeRecord(String accountId, String offerId, double price, int amount, String buySell, Calendar timestamp) {
+		DBCollection coll = db.getCollection("trade_records");
+		BasicDBObject doc = new BasicDBObject("currency", offerId).
+                append("price", price).
+                append("amount", amount).
+                append("operation", buySell).
+                append("timestamp", timestamp.getTime()).
+                append("account_id", new ObjectId(accountId));
+		coll.insert(doc);
 	}
 }

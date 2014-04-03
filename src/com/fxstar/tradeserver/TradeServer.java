@@ -16,13 +16,11 @@ public class TradeServer {
 	
 	private Map<String, Follower> followers = null;
 	private Map<String, Expert> experts = null;
-	//MongoDBWrapper dbWrapper = null;
-	DemoWrapper dbWrapper = null;
+	MongoDBWrapper dbWrapper = null;
 	
-	public void start() {
+	public void start(String dbip, int dbport, String dbname) {
 		try {
-			//dbWrapper = new MongoDBWrapper("192.168.56.102", 27017, "fx_star_development");
-			dbWrapper = new DemoWrapper();
+			dbWrapper = new MongoDBWrapper(dbip, dbport, dbname);
 			experts = dbWrapper.getExperts();
 			followers = dbWrapper.getFollowers();
 			dbWrapper.constructFollowships(experts, followers);
@@ -38,8 +36,8 @@ public class TradeServer {
 				Callback tableLoadedCb = getRegisterTableListenersCb(follower);
 				follower.login("http://www.fxcorporate.com/Hosts.jsp", "Demo", null, null, loginCb, tableLoadedCb);
 			}
-		//} catch (UnknownHostException e){
-		//	logger.error(e.toString());
+		} catch (UnknownHostException e){
+			logger.error(e.toString());
 		} finally {
 			logger.info("Server started.");
 		}
@@ -68,7 +66,7 @@ public class TradeServer {
 	public static void main(String[] args) {
 		DOMConfigurator.configure(args[0]);
 		TradeServer tradeServer = new TradeServer();
-		tradeServer.start();
+		tradeServer.start(args[1], Integer.parseInt(args[2]), args[3]);
 		while(true) {
 			try {
 				Thread.sleep(100);
