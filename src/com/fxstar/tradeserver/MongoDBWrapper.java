@@ -29,7 +29,7 @@ public class MongoDBWrapper {
 		logger.info("Database connected. " + ip + ":" + port + ":" + dbName);
 	}
 	
-	public HashMap<String, Expert> getExperts() {
+	public HashMap<String, Expert> getExperts(FollowShipManager fsm) {
 		DBCollection coll = db.getCollection("users");
 		BasicDBObject query = new BasicDBObject("_type", "Trader");
 		DBCursor cursor = coll.find(query);
@@ -45,7 +45,8 @@ public class MongoDBWrapper {
 										   accountId,
 										   account.getString("account_number"),
 						                   account.getString("password"),
-						                   this
+						                   this,
+						                   fsm
 						                  ));
 			}
 		} catch (ClassCastException e) {
@@ -85,7 +86,7 @@ public class MongoDBWrapper {
 		return followers;
 	}
 	
-	public void constructFollowships(Map<String, Expert> experts, Map<String, Follower> followers) {	
+	public void constructFollowships(FollowShipManager fsm, Map<String, Expert> experts, Map<String, Follower> followers) {	
 		DBCollection coll = db.getCollection("followships");
 		DBCursor cursor = coll.find();
 		try {
@@ -93,7 +94,7 @@ public class MongoDBWrapper {
 				BasicDBObject obj = (BasicDBObject) cursor.next();
 				String eid = obj.getObjectId("trader_id").toString();
 				String fid = obj.getObjectId("follower_id").toString();
-				experts.get(eid).addFollower(followers.get(fid));
+				fsm.addFollowShip(experts.get(eid), followers.get(fid), obj.getString("_id"));
 			}
 		} finally {
 			cursor.close();

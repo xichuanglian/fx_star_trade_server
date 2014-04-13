@@ -17,13 +17,15 @@ public class TradeServer {
 	private Map<String, Follower> followers = null;
 	private Map<String, Expert> experts = null;
 	MongoDBWrapper dbWrapper = null;
+	FollowShipManager followShipManager = null;
 	
 	public void start(String dbip, int dbport, String dbname) {
 		try {
 			dbWrapper = new MongoDBWrapper(dbip, dbport, dbname);
-			experts = dbWrapper.getExperts();
+			followShipManager = new FollowShipManager(dbWrapper);
+			experts = dbWrapper.getExperts(followShipManager);
 			followers = dbWrapper.getFollowers();
-			dbWrapper.constructFollowships(experts, followers);
+			dbWrapper.constructFollowships(followShipManager, experts, followers);
 			
 			for (Expert expert : experts.values()) {
 				Callback loginCb = getLoginCb(expert);
