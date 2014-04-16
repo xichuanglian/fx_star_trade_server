@@ -26,16 +26,12 @@ final Logger logger = Logger.getLogger(TradeInfo.class);
 			followers = dbWrapper.getFollowers();
 			dbWrapper.constructFollowships(followShipManager, experts, followers);
 			
-			//Expert me = experts.get("534aaeaf4159317576030000");
 			Expert me = experts.get("534cf07a4159317584020000");
 			logger.info(me.getDBAccountID());
 			
 			Callback loginCb = getLoginCb(me);
 			Callback tableLoadedCb = getRegisterTableListenersCb(me);
 			me.login("http://www.fxcorporate.com/Hosts.jsp", "Demo", null, null, loginCb, tableLoadedCb);
-			
-
-			
 			
 		} catch (UnknownHostException e){
 			logger.error(e.toString());

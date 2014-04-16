@@ -105,8 +105,9 @@ public abstract class Trader {
 		O2GClosedTradesTable closedTradesTable = (O2GClosedTradesTable) getTable(O2GTableType.CLOSED_TRADES);
 		for (int i = 0; i < closedTradesTable.size(); i++){
 			O2GClosedTradeRow closedTrade = closedTradesTable.getRow(i);
-			logger.info("TradeID:" + closedTrade.getTradeID() +
-						"\nGrossPL:" + closedTrade.getGrossPL());
+			logger.info("AccountID:" + dbAccountID + "  " +
+						"Equity:" + closedTrade.getAmount() + "  " +
+						"Profit:" + closedTrade.getGrossPL());
 		}
 	} 
 	
