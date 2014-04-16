@@ -21,7 +21,7 @@ import org.apache.log4j.Logger;
 public class MongoDBWrapper {
 	private final Logger logger = Logger.getLogger(MongoDBWrapper.class);
 	private MongoClient mongoClient = null;
-	private DB db = null;
+	public DB db = null;
 	
 	public MongoDBWrapper(String ip, int port, String dbName) throws UnknownHostException {
 		mongoClient = new MongoClient( ip, port );

@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.fxcore2.O2GClosedTradeRow;
+import com.fxcore2.O2GClosedTradesTable;
 import com.fxcore2.O2GOrderTableRow;
 import com.fxcore2.O2GOrdersTable;
 import com.fxcore2.O2GRow;
@@ -27,7 +29,7 @@ public class Expert extends Trader {
 	
 	@Override
 	public void registerTableListeners() {
-		registerOrdersTableListener();		
+		registerOrdersTableListener();	
 	}
 	
 	private void registerOrdersTableListener() {
@@ -37,6 +39,7 @@ public class Expert extends Trader {
 		tableListener.setRowDeletedCallback(cb);
 		ordersTable.subscribeUpdate(O2GTableUpdateType.DELETE, tableListener);
 	}
+	
 	
 	private TableUpdateCallback getOrderDeletedCallback() {
 		final List<FollowShip> followships = fsManager.getFollowShips(this);
