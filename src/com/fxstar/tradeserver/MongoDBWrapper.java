@@ -109,7 +109,7 @@ public class MongoDBWrapper {
 	public List<FollowShip> getFollowShips(String eid, FollowShipManager fsm) {
 		List<FollowShip> ret = new ArrayList<FollowShip>();
 		DBCollection coll = db.getCollection("followships");
-		BasicDBObject query = new BasicDBObject("trader_id", eid);
+		BasicDBObject query = new BasicDBObject("trader_id", new ObjectId(eid));
 		DBCursor cursor = coll.find(query);
 		try {
 			while (cursor.hasNext()) {

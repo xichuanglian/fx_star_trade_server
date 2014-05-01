@@ -42,10 +42,11 @@ public class Expert extends Trader {
 	
 	
 	private TableUpdateCallback getOrderDeletedCallback() {
-		final List<FollowShip> followships = fsManager.getFollowShips(this);
+		final Expert expert = this;
 		return new TableUpdateCallback() {
 			@Override
 			public void execute(O2GRow row) {
+				List<FollowShip> followships = fsManager.getFollowShips(expert);
 				O2GOrderTableRow r = (O2GOrderTableRow) row;
 				if (r.getStatus().equals("F")) {
 					logOrderTableRow(r);
