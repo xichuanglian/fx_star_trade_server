@@ -29,6 +29,7 @@ public class Follower extends Trader{
 
 	@Override
 	public void registerTableListeners() {
+		super.registerTableListeners();
 		registerOrderTableInsertedListener();
 	}
 	

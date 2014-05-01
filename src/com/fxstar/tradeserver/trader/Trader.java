@@ -1,29 +1,38 @@
 package com.fxstar.tradeserver.trader;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
 import com.fxcore2.O2GAccountRow;
 import com.fxcore2.O2GAccountsTableResponseReader;
 import com.fxcore2.O2GClosedTradeRow;
+import com.fxcore2.O2GClosedTradeTableRow;
 import com.fxcore2.O2GClosedTradesTable;
 import com.fxcore2.O2GLoginRules;
 import com.fxcore2.O2GOrderTableRow;
+import com.fxcore2.O2GOrdersTable;
 import com.fxcore2.O2GRequest;
 import com.fxcore2.O2GRequestFactory;
 import com.fxcore2.O2GResponse;
 import com.fxcore2.O2GResponseReaderFactory;
+import com.fxcore2.O2GRow;
 import com.fxcore2.O2GSession;
 import com.fxcore2.O2GSessionStatusCode;
 import com.fxcore2.O2GTable;
 import com.fxcore2.O2GTableManager;
 import com.fxcore2.O2GTableManagerMode;
 import com.fxcore2.O2GTableType;
+import com.fxcore2.O2GTableUpdateType;
 import com.fxcore2.O2GTransport;
 import com.fxcore2.O2GValueMap;
+import com.fxstar.tradeserver.FollowShip;
 import com.fxstar.tradeserver.MongoDBWrapper;
 import com.fxstar.tradeserver.listener.Callback;
 import com.fxstar.tradeserver.listener.SessionStatusListener;
 import com.fxstar.tradeserver.listener.TableManagerStatusListener;
+import com.fxstar.tradeserver.listener.TableStatusListener;
+import com.fxstar.tradeserver.listener.TableUpdateCallback;
 
 public abstract class Trader {
 	private String objectID = "";
@@ -105,9 +114,30 @@ public abstract class Trader {
 		fSession.dispose();
 	}
 	
-	public abstract void registerTableListeners();
+	public void registerTableListeners() {
+		registerClosedTradesTableListener();
+	}
 	
-	public void registerClosedTradeListener(){
+	private void registerClosedTradesTableListener() {
+		O2GClosedTradesTable closedTradesTable = (O2GClosedTradesTable) getTable(O2GTableType.CLOSED_TRADES);
+		TableStatusListener tableListener = new TableStatusListener();
+		TableUpdateCallback cb = getClosedTradeInsertedCallback();
+		tableListener.setRowAddedCallback(cb);
+		closedTradesTable.subscribeUpdate(O2GTableUpdateType.DELETE, tableListener);
+	}
+	
+	private TableUpdateCallback getClosedTradeInsertedCallback() {
+		return new TableUpdateCallback() {
+			@Override
+			public void execute(O2GRow row) {
+				O2GClosedTradeTableRow r = (O2GClosedTradeTableRow) row;
+				r.getAccountID();
+				r.getGrossPL();
+			}
+		};
+	}
+	
+	public void getClosedTrades(){
 		O2GClosedTradesTable closedTradesTable = (O2GClosedTradesTable) getTable(O2GTableType.CLOSED_TRADES);
 		for (int i = 0; i < closedTradesTable.size(); i++){
 			O2GClosedTradeRow closedTrade = closedTradesTable.getRow(i);

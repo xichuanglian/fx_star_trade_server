@@ -29,6 +29,7 @@ public class Expert extends Trader {
 	
 	@Override
 	public void registerTableListeners() {
+		super.registerTableListeners();
 		registerOrdersTableListener();	
 	}
 	
