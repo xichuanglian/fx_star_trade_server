@@ -25,18 +25,28 @@ public class TradeServer {
 			followShipManager = new FollowShipManager(dbWrapper);
 			experts = dbWrapper.getExperts(followShipManager);
 			followers = dbWrapper.getFollowers();
-			dbWrapper.constructFollowships(followShipManager, experts, followers);
+			followShipManager.setExperts(experts);
+			followShipManager.setFollowers(followers);
+			//dbWrapper.constructFollowships(followShipManager, experts, followers);
 			
 			for (Expert expert : experts.values()) {
 				Callback loginCb = getLoginCb(expert);
 				Callback tableLoadedCb = getRegisterTableListenersCb(expert);
-				expert.login("http://www.fxcorporate.com/Hosts.jsp", "Demo", null, null, loginCb, tableLoadedCb);
+				String type = "Demo";
+				if (expert.isReal()) {
+					type = "Real";
+				}
+				expert.login("http://www.fxcorporate.com/Hosts.jsp", type, null, null, loginCb, tableLoadedCb);
 			}
 			
 			for (Follower follower : followers.values()) {
 				Callback loginCb = getLoginCb(follower);
 				Callback tableLoadedCb = getRegisterTableListenersCb(follower);
-				follower.login("http://www.fxcorporate.com/Hosts.jsp", "Demo", null, null, loginCb, tableLoadedCb);
+				String type = "Demo";
+				if (follower.isReal()) {
+					type = "Real";
+				}
+				follower.login("http://www.fxcorporate.com/Hosts.jsp", type, null, null, loginCb, tableLoadedCb);
 			}
 		} catch (UnknownHostException e){
 			logger.error(e.toString());

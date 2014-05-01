@@ -31,6 +31,7 @@ public abstract class Trader {
 	private String accountID = "";
 	private String fAccount = "";
 	private String fPassword = "";
+	private Boolean real = false;
 	private O2GSession fSession = null;
 	private O2GTableManager tableManager = null;
 	private O2GRequestFactory rFactory = null;
@@ -40,10 +41,11 @@ public abstract class Trader {
 	
 	private final Logger logger = Logger.getLogger(Trader.class);
 	
-	protected Trader(String id, String aid, String account, String password, MongoDBWrapper db) {
+	protected Trader(String id, String aid, String account, String password, Boolean real, MongoDBWrapper db) {
 		objectID = id;
 		dbAccountID = aid;
 		dbWrapper = db;
+		this.real = real;
 		if (account != null) {
 			fAccount = account;
 		} else {
@@ -54,6 +56,10 @@ public abstract class Trader {
 		} else {
 			fPassword = "";
 		}
+	}
+	
+	public Boolean isReal() {
+		return real;
 	}
 	
 	public String getObjectID() {

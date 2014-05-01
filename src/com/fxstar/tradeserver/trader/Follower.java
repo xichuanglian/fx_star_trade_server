@@ -22,8 +22,8 @@ public class Follower extends Trader{
 	private HashMap<String, String> tradeIdMap = null;
 	private final String CUSTOM_ID = "FX_STAR_AUTO_TRADE";
 	
-	public Follower(String id, String aid, String account, String password, MongoDBWrapper db) {
-		super(id, aid, account, password, db);
+	public Follower(String id, String aid, String account, String password, Boolean real, MongoDBWrapper db) {
+		super(id, aid, account, password, real, db);
 		tradeIdMap = new HashMap<String, String>();
 	}
 

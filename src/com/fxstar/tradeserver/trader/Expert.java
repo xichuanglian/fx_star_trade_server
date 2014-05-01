@@ -22,8 +22,8 @@ public class Expert extends Trader {
 	
 	private FollowShipManager fsManager = null;
 	
-	public Expert(String id, String aid, String account, String password, MongoDBWrapper db, FollowShipManager fsm) {
-		super(id, aid, account, password, db);
+	public Expert(String id, String aid, String account, String password, Boolean real, MongoDBWrapper db, FollowShipManager fsm) {
+		super(id, aid, account, password, real, db);
 		fsManager = fsm;
 	}
 	

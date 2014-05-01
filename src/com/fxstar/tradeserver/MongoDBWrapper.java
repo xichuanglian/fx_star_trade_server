@@ -9,10 +9,13 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.MongoClient;
+
 import org.bson.types.ObjectId;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -45,6 +48,7 @@ public class MongoDBWrapper {
 										   accountId,
 										   account.getString("account_number"),
 						                   account.getString("password"),
+						                   account.getBoolean("real"),
 						                   this,
 						                   fsm
 						                  ));
@@ -74,6 +78,7 @@ public class MongoDBWrapper {
 											   accountId,
 						               	       account.getString("account_number"),
 						               	       account.getString("password"),
+						               	       account.getBoolean("real"),
 						               	       this
 						               	  	  ));
 			}
@@ -86,7 +91,7 @@ public class MongoDBWrapper {
 		return followers;
 	}
 	
-	public void constructFollowships(FollowShipManager fsm, Map<String, Expert> experts, Map<String, Follower> followers) {	
+	/*public void constructFollowships(FollowShipManager fsm, Map<String, Expert> experts, Map<String, Follower> followers) {	
 		DBCollection coll = db.getCollection("followships");
 		DBCursor cursor = coll.find();
 		try {
@@ -99,6 +104,24 @@ public class MongoDBWrapper {
 		} finally {
 			cursor.close();
 		}
+	}*/
+	
+	public List<FollowShip> getFollowShips(String eid, FollowShipManager fsm) {
+		List<FollowShip> ret = new ArrayList<FollowShip>();
+		DBCollection coll = db.getCollection("followships");
+		BasicDBObject query = new BasicDBObject("trader_id", eid);
+		DBCursor cursor = coll.find(query);
+		try {
+			while (cursor.hasNext()) {
+				BasicDBObject obj = (BasicDBObject) cursor.next();
+				String fid = obj.getObjectId("follower_id").toString();
+				FollowShip fs = fsm.createFollowShip(eid, fid, obj.getString("_id"));
+				ret.add(fs);
+			} 
+		} finally {
+			cursor.close();
+		}
+		return ret;
 	}
 	
 	public void saveTradeRecord(String accountId, String offerId, double price, int amount, String buySell, Calendar timestamp) {
