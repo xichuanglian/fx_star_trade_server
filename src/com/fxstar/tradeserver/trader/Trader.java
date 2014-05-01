@@ -131,8 +131,8 @@ public abstract class Trader {
 			@Override
 			public void execute(O2GRow row) {
 				O2GClosedTradeTableRow r = (O2GClosedTradeTableRow) row;
-				r.getAccountID();
-				r.getGrossPL();
+				
+				dbWrapper.saveClosedTradeRecord(getDBAccountID(), r.getTradeID(), r.getAccountID(), r.getAmount(), r.getBuySell(), r.getGrossPL(), r.getCommission(), r.getOpenRate(), r.getOpenQuoteID(), r.getOpenTime(), r.getCloseRate(), r.getCloseTime(), r.getValueDate());
 			}
 		};
 	}
@@ -193,4 +193,5 @@ public abstract class Trader {
 	protected void saveTradeRecord(O2GOrderTableRow row) {
 		dbWrapper.saveTradeRecord(getDBAccountID(), row.getOfferID(), row.getRate(), row.getOriginAmount(), row.getBuySell(), row.getStatusTime());
 	}
+
 }

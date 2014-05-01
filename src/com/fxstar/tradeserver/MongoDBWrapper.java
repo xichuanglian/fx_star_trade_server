@@ -134,4 +134,22 @@ public class MongoDBWrapper {
                 append("account_id", new ObjectId(accountId));
 		coll.insert(doc);
 	}
+	// getDBAccountID(), r.getTradeID(), r.getAccountID(), r.getAmount(), r.getBuySell(), r.getGrossPL(), r.getCommission(), r.getOpenRate(), r.getOpenQuoteID(), r.getOpenTime(), r.getCloseRate(), r.getCloseTime(), r.getValueDate());
+	public void saveClosedTradeRecord(String dbAccountId, String tradeId, String FXaccountId, int amount, String buySell, double grossPL, double commission, double openRate, String openQuoteId, Calendar openTime, double closeRate, Calendar closeTime, String valueDate) {
+		// TODO
+		DBCollection collection = db.getCollection("closed_trade_records");
+		BasicDBObject document = new BasicDBObject("tradeId", tradeId).
+				append("fx_accountId", FXaccountId).
+				append("amount", amount).
+				append("buySell", buySell).
+				append("grossPL", grossPL).
+				append("commission", commission).
+				append("openRate", openRate).
+				append("openQuoteId", openQuoteId).
+				append("openTime", openTime).
+				append("closeRate", closeRate).
+				append("closeTime", closeTime).
+				append("valueDate", valueDate);
+		collection.insert(document);
+	}
 }
