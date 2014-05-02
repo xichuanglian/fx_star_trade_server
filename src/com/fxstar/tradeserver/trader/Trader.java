@@ -97,7 +97,6 @@ public abstract class Trader {
 	
 	public void login(String url, String conName, String DBName, String pin, Callback loginCb, Callback tableLoadedCb) {
 		if (statusListener != null) {
-			logger.debug("Trying to login again, abort!");
 			return;
 		}
 		fSession = O2GTransport.createSession();
@@ -123,7 +122,7 @@ public abstract class Trader {
 		TableStatusListener tableListener = new TableStatusListener();
 		TableUpdateCallback cb = getClosedTradeInsertedCallback();
 		tableListener.setRowAddedCallback(cb);
-		closedTradesTable.subscribeUpdate(O2GTableUpdateType.DELETE, tableListener);
+		closedTradesTable.subscribeUpdate(O2GTableUpdateType.INSERT, tableListener);
 	}
 	
 	private TableUpdateCallback getClosedTradeInsertedCallback() {
@@ -131,7 +130,6 @@ public abstract class Trader {
 			@Override
 			public void execute(O2GRow row) {
 				O2GClosedTradeTableRow r = (O2GClosedTradeTableRow) row;
-				
 				dbWrapper.saveClosedTradeRecord(getDBAccountID(), r.getTradeID(), r.getAccountID(), r.getAmount(), r.getBuySell(), r.getGrossPL(), r.getCommission(), r.getOpenRate(), r.getOpenQuoteID(), r.getOpenTime(), r.getCloseRate(), r.getCloseTime(), r.getValueDate());
 			}
 		};
